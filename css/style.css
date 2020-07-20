@@ -74,7 +74,7 @@ cursor: pointer;
     transition: all 0.7s ease-out;
 }
 .background{
-    background: url('bg.jpg') rgba(0, 0, 0, 0.7);
+    background: url('https://cdn.pixabay.com/photo/2014/05/02/23/46/new-york-city-336475_960_720.jpg') rgba(0, 0, 0, 0.7);
     background-size: cover;
     background-blend-mode: darken;
 }
