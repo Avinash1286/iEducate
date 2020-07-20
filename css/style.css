@@ -74,7 +74,7 @@ cursor: pointer;
     transition: all 0.7s ease-out;
 }
 .background{
-    background: url('./bg.jpg') rgba(0, 0, 0, 0.7);
+    background: url('bg.jpg') rgba(0, 0, 0, 0.7);
     background-size: cover;
     background-blend-mode: darken;
 }
