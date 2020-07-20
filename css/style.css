@@ -1,0 +1,215 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+html{
+    scroll-behavior: smooth;
+}
+.navbar{
+    position: sticky;
+    top: 0;
+    display: flex;
+    align-items: center;
+    transition: all 0.7s ease-out;
+    
+}
+.nav-list{
+    display: flex;
+    align-items: center;
+    width: 70%;
+    opacity: 1;
+    transition: all 0.7s ease-out;
+
+}
+.nav-list li{
+    list-style: none;
+    margin: 14px 30px;
+}
+.nav-list li a:hover{
+ 
+    border-radius: 10px;
+    background-color: white;
+    color: black;
+    outline: none;
+}
+
+
+.nav-list li a{
+    padding: 16px 14px;
+    text-decoration: none;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: white;
+}
+.burger{
+position: absolute;
+top: 15px;
+visibility: hidden;
+right: 5%;
+cursor: pointer;
+
+}
+.line{
+    width: 33px;
+    height: 4px;
+    background-color: white;
+    margin: 5px 3px;
+}
+.logo img{
+    width: 50px;
+    height: 50px;
+    border: 2px solid rgb(255, 255, 255);
+    border-radius: 100px;
+    margin-left: 30px;
+    margin-right: 10px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+.rightNav{
+    width: 30%;
+    text-align: right;
+    margin-right: 10px;
+    opacity: 1;
+    transition: all 0.7s ease-out;
+}
+.background{
+    background: url('/bg.jpg') rgba(0, 0, 0, 0.7);
+    background-size: cover;
+    background-blend-mode: darken;
+}
+
+.firstSection{
+    height: 100vh;
+}
+.rightNav input{
+    border: 2px solid white;
+    border-radius: 5px;
+    padding: 3px;
+    outline: none;
+}
+
+.main-box{
+    display: flex;
+    width: 60%;
+    height: 65%;
+    align-items: center;
+    margin: auto;
+}
+.firstHalf{
+    display: flex;
+    flex-direction: column;
+}
+.big-text{
+    color: white;
+    font-size: 40px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.small-text{
+    color: white;
+    font-size: 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.secondHalf img{
+    border: 2px solid white;
+    border-radius: 120px;
+    width: 200px;
+    height: 200px;
+}
+.btn{
+    border: 2px solid white;
+    padding: 8px;
+    color: white;
+    margin-left: 10px;
+    background: none;
+    border-radius: 8px;
+    outline: none;
+    cursor: pointer;
+}
+.btn-sm{
+    border: 2px solid white;
+    padding: 5px;
+    color: white;
+    background: none;
+    border-radius: 8px;
+    outline: none;
+    cursor: pointer;
+}
+
+.paraSection{
+    display: flex;
+    width: 80%;
+    margin: 50px auto;
+
+}
+
+.para-big-text{
+    color: black;
+    font-size: 40px;
+    font-family: 'Ubuntu', sans-serif;
+    margin-bottom: 10px;
+}
+.para-small-text{
+    color: black;
+    font-size: 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.reverse{
+flex-direction: row-reverse;
+}
+.thumbnail{
+    margin-left: 30px;
+    margin-right: 30px;
+}
+.thumbnail img{
+    border-radius: 30px;
+}
+
+.contact{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: rgb(201, 199, 199);
+    padding: 20px;
+    height: auto;
+}
+.form{
+    display: flex;
+    width: 60%;
+    margin: auto;
+    flex-direction: column;
+}
+.contact h1{
+    font-size: 34px;
+    font-family: 'Ubuntu', sans-serif;
+    text-align: center;
+    margin-bottom: 30px;
+
+}
+.form-input{
+    outline: none;
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+    margin-bottom: 7px;
+}
+#submit{
+    outline: none;
+    border-radius: 10px;
+    width: 60px;
+    padding: 10px;
+    margin: 10px;
+    border: none;
+    cursor: pointer;
+}
+
+
+#footer{
+    padding: 10px;
+    text-align: center;
+    width: 100%;
+    font-weight: bold;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: rgba(0, 0, 0, 0.7);
+}
