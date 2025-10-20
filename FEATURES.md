@@ -85,6 +85,34 @@
 - Jump to sections, toggle dark mode, open color picker, or apply filters
 - Keyboard navigation with Arrow Up/Down and Enter
 
+### 15. **PWA Support** 📦
+- Web App Manifest and Service Worker added
+- Works offline for cached pages and assets
+- Installable app with in-app Install button when eligible
+
+### 16. **Network Status Toast** 📶
+- Detects online/offline events
+- Shows subtle toast indicating connectivity changes
+
+### 17. **Blog Search** 🔎
+- Client-side search filters posts instantly
+- Highlights matching text within results
+
+### 18. **Portfolio Favorites** ❤️
+- Heart button on projects to mark favorites
+- “Favorites” filter shows only saved items
+- Favorites persist in localStorage
+
+### 19. **Settings Panel** ⚙️
+- Font size scaling via range slider
+- Reduce-motion toggle for accessibility
+- Preferences persist in localStorage
+
+### 20. **SEO & Structured Data** 📈
+- Open Graph and Twitter meta tags
+- JSON-LD Organization schema embedded
+- Theme color meta for better PWA/Android integration
+
 ## 🎨 Design Improvements
 
 - **Responsive Design**: All new features work perfectly on mobile, tablet, and desktop
