@@ -204,6 +204,15 @@
         width: 300px;
         height: 400px;
     }
+
+    .color-picker {
+        right: 10px;
+        width: calc(100vw - 20px);
+    }
+
+    .swatches {
+        grid-template-columns: repeat(8, 1fr);
+    }
     
     .cookie-consent.show {
         flex-direction: column;
@@ -266,6 +275,14 @@
     .btn-cookie {
         padding: 0.6rem 1.5rem;
         font-size: 0.9rem;
+    }
+
+    .lightbox-content img {
+        max-height: 60vh;
+    }
+
+    .portfolio-filters {
+        gap: 0.5rem;
     }
 }
 
