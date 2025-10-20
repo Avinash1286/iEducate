@@ -1543,3 +1543,40 @@ body.dark-mode .btn-cookie.decline {
 .btn-cookie.decline:hover {
     background: var(--border-color);
 }
+
+/* ==================== Advanced Features Styles ==================== */
+/* Accessibility */
+.skip-link { position: absolute; left: -9999px; top: auto; width: 1px; height: 1px; overflow: hidden; }
+.skip-link:focus { position: fixed; left: 20px; top: 15px; width: auto; height: auto; background: var(--primary-color); color: #fff; padding: 8px 12px; border-radius: 6px; z-index: 2000; }
+
+/* Install & Settings Buttons */
+.install-btn, .settings-toggle { background: none; border: 1px solid var(--border-color); color: var(--text-color); padding: 0.4rem 0.75rem; border-radius: 8px; margin-left: 0.5rem; cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem; }
+.install-btn[hidden] { display: none; }
+.install-btn:hover, .settings-toggle:hover { border-color: var(--primary-color); color: var(--primary-color); }
+
+/* Portfolio favorites */
+.fav-toggle { position: absolute; top: 10px; right: 10px; width: 38px; height: 38px; border-radius: 50%; border: none; background: rgba(255,255,255,0.9); color: #dc3545; display: flex; align-items: center; justify-content: center; box-shadow: var(--shadow); cursor: pointer; }
+.fav-toggle.active { background: #dc3545; color: #fff; }
+
+/* Blog search */
+.blog-controls { display: flex; justify-content: flex-end; margin-bottom: 1rem; }
+#blogSearch { padding: 0.6rem 0.8rem; border: 1px solid var(--border-color); border-radius: 6px; width: min(320px, 100%); }
+.highlight { background: #ffe08a; padding: 0 2px; }
+
+/* Settings Panel */
+.settings-panel { position: fixed; inset: 0; background: rgba(0,0,0,0.35); display: none; align-items: center; justify-content: center; z-index: 1300; }
+.settings-panel.open { display: flex; }
+.settings-inner { background: #fff; width: min(520px, 92vw); border-radius: 12px; box-shadow: var(--shadow-lg); }
+body.dark-mode .settings-inner { background: #1e1e1e; }
+.settings-header { display: flex; align-items: center; justify-content: space-between; padding: 1rem 1.25rem; border-bottom: 1px solid var(--border-color); }
+.settings-close { background: none; border: none; font-size: 1.1rem; cursor: pointer; }
+.settings-body { padding: 1rem 1.25rem; }
+.setting-item { margin-bottom: 1rem; display: flex; gap: 0.75rem; align-items: center; }
+.setting-item.inline { display: flex; gap: 0.5rem; align-items: center; }
+
+/* Reduced motion override */
+body.reduce-motion *, body.reduce-motion *::before, body.reduce-motion *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+
+/* Network Toast */
+.net-toast { position: fixed; left: 50%; transform: translateX(-50%); bottom: 20px; background: #222; color: #fff; padding: 0.6rem 1rem; border-radius: 8px; box-shadow: var(--shadow-lg); display: none; z-index: 1500; }
+.net-toast.show { display: block; }

@@ -720,3 +720,179 @@ console.log('🚀 iEducate website loaded successfully with all new features!');
         if (e.target === palette) close();
     });
 })();
+
+// ==================== ADVANCED: PWA & Install ====================
+(() => {
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+            navigator.serviceWorker.register('/sw.js').catch(console.error);
+        });
+    }
+
+    let deferredPrompt;
+    const installBtn = document.getElementById('installBtn');
+    window.addEventListener('beforeinstallprompt', (e) => {
+        e.preventDefault();
+        deferredPrompt = e;
+        if (installBtn) installBtn.hidden = false;
+    });
+    installBtn && installBtn.addEventListener('click', async () => {
+        if (!deferredPrompt) return;
+        deferredPrompt.prompt();
+        const { outcome } = await deferredPrompt.userChoice;
+        if (outcome) installBtn.hidden = true;
+        deferredPrompt = null;
+    });
+})();
+
+// ==================== ADVANCED: Network Status Toast ====================
+(() => {
+    const toast = document.getElementById('netToast');
+    if (!toast) return;
+    function show(msg, ok) {
+        toast.textContent = msg;
+        toast.style.background = ok ? '#0a7b34' : '#a61b1b';
+        toast.classList.add('show');
+        setTimeout(() => toast.classList.remove('show'), 2500);
+    }
+    window.addEventListener('offline', () => show('You are offline', false));
+    window.addEventListener('online', () => show('Back online', true));
+})();
+
+// ==================== ADVANCED: Blog Search ====================
+(() => {
+    const input = document.getElementById('blogSearch');
+    if (!input) return;
+    const cards = Array.from(document.querySelectorAll('.blog-card'));
+
+    function normalize(str) { return str.toLowerCase(); }
+
+    function highlight(el, query) {
+        // Remove previous highlights
+        el.querySelectorAll('.highlight').forEach(h => {
+            const parent = h.parentNode; parent.replaceChild(document.createTextNode(h.textContent), h);
+            parent.normalize();
+        });
+        if (!query) return;
+        const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT, null);
+        const q = normalize(query);
+        const textNodes = [];
+        let node; while (node = walker.nextNode()) { textNodes.push(node); }
+        textNodes.forEach(n => {
+            const text = normalize(n.nodeValue);
+            const idx = text.indexOf(q);
+            if (idx >= 0) {
+                const span = document.createElement('span');
+                span.className = 'highlight';
+                const before = n.nodeValue.slice(0, idx);
+                const match = n.nodeValue.slice(idx, idx + q.length);
+                const after = n.nodeValue.slice(idx + q.length);
+                const frag = document.createDocumentFragment();
+                if (before) frag.appendChild(document.createTextNode(before));
+                span.textContent = match; frag.appendChild(span);
+                if (after) frag.appendChild(document.createTextNode(after));
+                n.parentNode.replaceChild(frag, n);
+            }
+        });
+    }
+
+    input.addEventListener('input', () => {
+        const q = normalize(input.value.trim());
+        cards.forEach(card => {
+            const text = normalize(card.innerText);
+            const show = !q || text.includes(q);
+            card.style.display = show ? '' : 'none';
+            highlight(card, q);
+        });
+    });
+})();
+
+// ==================== ADVANCED: Portfolio Favorites ====================
+(() => {
+    const items = Array.from(document.querySelectorAll('.portfolio-item'));
+    if (!items.length) return;
+    const buttons = items.map(i => i.querySelector('.fav-toggle')).filter(Boolean);
+    const key = 'favorites';
+    const saved = new Set(JSON.parse(localStorage.getItem(key) || '[]'));
+
+    function syncUI() {
+        items.forEach(item => {
+            const id = item.getAttribute('data-id');
+            const btn = item.querySelector('.fav-toggle');
+            const isFav = saved.has(id);
+            if (btn) {
+                btn.classList.toggle('active', isFav);
+                btn.setAttribute('aria-pressed', String(isFav));
+                btn.title = isFav ? 'Remove favorite' : 'Add favorite';
+            }
+        });
+    }
+
+    buttons.forEach((btn) => {
+        btn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const item = btn.closest('.portfolio-item');
+            const id = item.getAttribute('data-id');
+            if (saved.has(id)) saved.delete(id); else saved.add(id);
+            localStorage.setItem(key, JSON.stringify(Array.from(saved)));
+            syncUI();
+        });
+    });
+
+    // Integrate with existing filters
+    const filterBar = document.querySelector('.portfolio-filters');
+    function applyFavoritesFilter() {
+        items.forEach(item => {
+            const id = item.getAttribute('data-id');
+            const show = saved.has(id);
+            item.classList.toggle('hidden', !show);
+        });
+    }
+    filterBar && filterBar.addEventListener('click', (e) => {
+        const btn = e.target.closest('.filter-btn');
+        if (!btn) return;
+        if (btn.dataset.filter === 'favorites') {
+            applyFavoritesFilter();
+        }
+    });
+
+    syncUI();
+})();
+
+// ==================== ADVANCED: Settings Panel ====================
+(() => {
+    const toggle = document.getElementById('settingsToggle');
+    const panel = document.getElementById('settingsPanel');
+    const closeBtn = document.getElementById('settingsClose');
+    const fontScale = document.getElementById('fontScale');
+    const reducedMotion = document.getElementById('reducedMotion');
+    if (!panel) return;
+
+    function open() { panel.classList.add('open'); panel.setAttribute('aria-hidden', 'false'); }
+    function close() { panel.classList.remove('open'); panel.setAttribute('aria-hidden', 'true'); }
+
+    toggle && toggle.addEventListener('click', open);
+    closeBtn && closeBtn.addEventListener('click', close);
+    panel.addEventListener('click', (e) => { if (e.target === panel) close(); });
+
+    // Persistence
+    const keyScale = 'fontScale';
+    const keyReduce = 'reduceMotion';
+    const savedScale = parseFloat(localStorage.getItem(keyScale) || '1');
+    const savedReduce = localStorage.getItem(keyReduce) === 'true';
+    document.documentElement.style.setProperty('font-size', `${savedScale * 100}%`);
+    document.body.classList.toggle('reduce-motion', savedReduce);
+    if (fontScale) fontScale.value = String(savedScale);
+    if (reducedMotion) reducedMotion.checked = savedReduce;
+
+    fontScale && fontScale.addEventListener('input', () => {
+        const v = parseFloat(fontScale.value || '1');
+        document.documentElement.style.setProperty('font-size', `${v * 100}%`);
+        localStorage.setItem(keyScale, String(v));
+    });
+    reducedMotion && reducedMotion.addEventListener('change', () => {
+        const on = reducedMotion.checked;
+        document.body.classList.toggle('reduce-motion', on);
+        localStorage.setItem(keyReduce, String(on));
+    });
+})();

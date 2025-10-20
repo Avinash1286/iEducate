@@ -5,6 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Professional portfolio and services website">
     <meta name="keywords" content="web development, design, portfolio">
+    <meta name="theme-color" content="#007bff">
+    <meta property="og:title" content="iEducate — Excellence in Digital Experiences">
+    <meta property="og:description" content="We build beautiful, fast, and modern web experiences.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://example.com/">
+    <meta property="og:image" content="https://via.placeholder.com/1200x630.png?text=iEducate">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="iEducate — Excellence in Digital Experiences">
+    <meta name="twitter:description" content="We build beautiful, fast, and modern web experiences.">
+    <meta name="twitter:image" content="https://via.placeholder.com/1200x630.png?text=iEducate">
     <title>Your Website Title</title>
     
     <!-- Preload critical resources -->
@@ -13,11 +23,13 @@
     
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/responsive.css">
+    <link rel="manifest" href="/manifest.webmanifest">
     
     <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
+    <a class="skip-link" href="#home">Skip to content</a>
     <!-- Loading Screen -->
     <div class="loading-screen" id="loadingScreen">
         <div class="loader">
@@ -55,6 +67,13 @@
             </button>
             <button class="color-toggle" id="colorPickerToggle" aria-label="Choose theme color" title="Choose theme color">
                 <i class="fas fa-palette"></i>
+            </button>
+            <button class="settings-toggle" id="settingsToggle" aria-label="Open settings" title="Settings">
+                <i class="fas fa-gear"></i>
+            </button>
+            <button class="install-btn" id="installBtn" aria-label="Install app" title="Install app" hidden>
+                <i class="fas fa-download"></i>
+                <span>Install</span>
             </button>
         </div>
     </nav>
@@ -169,31 +188,35 @@
                 <button class="filter-btn" data-filter="web" role="tab" aria-selected="false">Web</button>
                 <button class="filter-btn" data-filter="design" role="tab" aria-selected="false">Design</button>
                 <button class="filter-btn" data-filter="mobile" role="tab" aria-selected="false">Mobile</button>
+                <button class="filter-btn" data-filter="favorites" role="tab" aria-selected="false">Favorites</button>
             </div>
             <div class="portfolio-grid">
-                <div class="portfolio-item" data-category="web" data-caption="Project 1 — Web Development">
+                <div class="portfolio-item" data-id="p1" data-category="web" data-caption="Project 1 — Web Development">
                     <img src="https://via.placeholder.com/1200x900" alt="Project 1" loading="lazy">
                     <div class="portfolio-overlay">
                         <h3>Project Title</h3>
                         <p>Web Development</p>
                         <a href="#" class="btn-view">View Project</a>
                     </div>
+                    <button class="fav-toggle" aria-label="Toggle favorite" aria-pressed="false"><i class="fas fa-heart"></i></button>
                 </div>
-                <div class="portfolio-item" data-category="design" data-caption="Project 2 — Design">
+                <div class="portfolio-item" data-id="p2" data-category="design" data-caption="Project 2 — Design">
                     <img src="https://via.placeholder.com/1200x900/222/fff" alt="Project 2" loading="lazy">
                     <div class="portfolio-overlay">
                         <h3>Project Title</h3>
                         <p>Design</p>
                         <a href="#" class="btn-view">View Project</a>
                     </div>
+                    <button class="fav-toggle" aria-label="Toggle favorite" aria-pressed="false"><i class="fas fa-heart"></i></button>
                 </div>
-                <div class="portfolio-item" data-category="mobile" data-caption="Project 3 — Mobile App">
+                <div class="portfolio-item" data-id="p3" data-category="mobile" data-caption="Project 3 — Mobile App">
                     <img src="https://via.placeholder.com/1200x900/555/fff" alt="Project 3" loading="lazy">
                     <div class="portfolio-overlay">
                         <h3>Project Title</h3>
                         <p>Mobile App</p>
                         <a href="#" class="btn-view">View Project</a>
                     </div>
+                    <button class="fav-toggle" aria-label="Toggle favorite" aria-pressed="false"><i class="fas fa-heart"></i></button>
                 </div>
             </div>
         </div>
@@ -256,6 +279,9 @@
     <section id="blog" class="section blog">
         <div class="container">
             <h2 class="section-title">Latest News & Insights</h2>
+            <div class="blog-controls">
+                <input type="search" id="blogSearch" placeholder="Search articles..." aria-label="Search blog posts" />
+            </div>
             <div class="blog-grid">
                 <article class="blog-card">
                     <div class="blog-image">
@@ -515,6 +541,46 @@
             <button class="btn-cookie decline" id="declineCookies">Decline</button>
         </div>
     </div>
+
+    <!-- Settings Panel -->
+    <div class="settings-panel" id="settingsPanel" aria-hidden="true" role="dialog" aria-label="Settings">
+        <div class="settings-inner">
+            <div class="settings-header">
+                <h4><i class="fas fa-sliders-h"></i> Settings</h4>
+                <button class="settings-close" id="settingsClose" aria-label="Close settings"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="settings-body">
+                <div class="setting-item">
+                    <label for="fontScale">Font size</label>
+                    <input type="range" id="fontScale" min="0.9" max="1.3" step="0.05" value="1" />
+                </div>
+                <div class="setting-item inline">
+                    <input type="checkbox" id="reducedMotion" />
+                    <label for="reducedMotion">Reduce motion</label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Network Status Toast -->
+    <div class="net-toast" id="netToast" role="status" aria-live="polite"></div>
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "iEducate",
+      "url": "https://example.com/",
+      "logo": "https://via.placeholder.com/256.png?text=iE",
+      "sameAs": [
+        "https://facebook.com/",
+        "https://twitter.com/",
+        "https://instagram.com/",
+        "https://linkedin.com/"
+      ]
+    }
+    </script>
 
     <script src="js/responsive.js"></script>
 </body>
