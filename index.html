@@ -1,119 +1,234 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>iEducate - Transforming Online Education</title>
+    <meta name="description" content="Professional portfolio and services website">
+    <meta name="keywords" content="web development, design, portfolio">
+    <title>Your Website Title</title>
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" href="css/style.css" as="style">
+    <link rel="preload" href="css/responsive.css" as="style">
+    
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/responsive.css">
+    
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-
 <body>
-    <nav class="navbar background navbar-resp  h-nav">  
-        <ul class="nav-list nav-list-resp v-class">
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="container">
             <div class="logo">
-                <img src="hell.jpg" alt="Brand Logo">
+                <a href="#home">YourBrand</a>
             </div>
-            <li><a href="#home">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#service">Service</a></li>
-            <li><a href="#contact">Contact</a></li>
-        </ul>
-
-        <div class="rightNav rightNav-resp v-class">
-            <input type="text" name="search">
-            <button class="btn btn-sm" id="search">Search</button>
-        </div>
-        <div class="burger burger-resp">
-            <div class="line"></div>
-            <div class="line"></div>
-            <div class="line"></div>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#home" class="nav-link">Home</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#services" class="nav-link">Services</a></li>
+                <li><a href="#portfolio" class="nav-link">Portfolio</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
         </div>
     </nav>
 
-    <section class="background firstSection" id="home">
-        <div class="main-box">
-            <div class="firstHalf">
-                <p class="big-text">iEducate is the future</p>
-                <p class="small-text">There are seven billion people on this planet and everyone is different from one
-                    another and all of them have different education</p>
-                <div class="buttons-holder">
-                    <button class="btn">Subscribe</button>
-                    <button class="btn">Watch Video</button>
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1 class="hero-title animate-fade-in">Welcome to Excellence</h1>
+            <p class="hero-subtitle animate-fade-in-delay">Creating stunning digital experiences</p>
+            <div class="hero-cta animate-fade-in-delay-2">
+                <a href="#contact" class="btn btn-primary">Get Started</a>
+                <a href="#portfolio" class="btn btn-secondary">View Work</a>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <i class="fas fa-chevron-down"></i>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section about">
+        <div class="container">
+            <h2 class="section-title">About Us</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>Who We Are</h3>
+                    <p>We are a team of passionate professionals dedicated to delivering exceptional results. With years of experience and cutting-edge expertise, we transform ideas into reality.</p>
+                    <ul class="features-list">
+                        <li><i class="fas fa-check"></i> Expert Team</li>
+                        <li><i class="fas fa-check"></i> Quality Assured</li>
+                        <li><i class="fas fa-check"></i> 24/7 Support</li>
+                    </ul>
+                </div>
+                <div class="about-image">
+                    <img src="https://via.placeholder.com/500x400" alt="About us" loading="lazy">
                 </div>
             </div>
+        </div>
+    </section>
 
-            <div class="secondHalf">
-                <img src="https://source.unsplash.com/200x200/?books,library" alt="Picture">
+    <!-- Services Section -->
+    <section id="services" class="section services">
+        <div class="container">
+            <h2 class="section-title">Our Services</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <h3>Web Development</h3>
+                    <p>Custom websites built with modern technologies and best practices.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-paint-brush"></i>
+                    </div>
+                    <h3>UI/UX Design</h3>
+                    <p>Beautiful, intuitive designs that users love to interact with.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3>Mobile Apps</h3>
+                    <p>Native and cross-platform mobile applications.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>SEO & Marketing</h3>
+                    <p>Drive traffic and grow your online presence.</p>
+                </div>
             </div>
-
-        </div>
-
-    </section>
-
-    <section class="paraSection" id="about">
-        <div class="paraHolder">
-            <p class="para-big-text">Educate Your Selft</p>
-            <p class="para-small-text">Education can be thought of as the transmission of the values and accumulated
-                knowledge of a society. In this sense, it is equivalent to what social scientists term socialization or
-                enculturation. Children—whether conceived among New Guinea tribespeople, the Renaissance Florentines, or
-                the middle classes of Manhattan—are born without culture. Education is designed to guide them in
-                learning a culture, molding their behaviour in the ways of adulthood, and directing them toward their
-                eventual role in society.</p>
-        </div>
-        <div class="thumbnail">
-            <img src="https://source.unsplash.com/300x300/?passion" alt="Picture">
         </div>
     </section>
 
-    <section class="paraSection reverse" id="service">
-        <div class="paraHolder">
-            <p class="para-big-text">Passino Is The Greatest Key</p>
-            <p class="para-small-text">The most famous example being the passion of Jesus Christ. This definition has
-                changed my perspective on passion. I no longer use it to describe something that I feel strongly about
-                or that excites me. I use it to describe an activity, goal or cause that I care about so much that I am
-                willing to suffer for it. This new standard makes it easier to discern whether something is truly my
-                passion or simply a strong interest.</p>
-        </div>
-        <div class="thumbnail">
-            <img src="https://source.unsplash.com/300x300/?success" alt="Picture">
-        </div>
-    </section>
-
-    <section class="paraSection">
-        <div class="paraHolder">
-            <p class="para-big-text">Here Is Your Success</p>
-            <p class="para-small-text">There are many ways in the world to be successful. But most people think of
-                celebrities, artist, politicians, and businessmen whenever they heard the word success.
-
-                Moreover, they think doing what they will make you successful but that not the case. They forget the
-                most basic thing that makes a person successful that is their hard work, dedication, and the desire to
-                achieve their dream. More importantly, they what they like to do not what that others told them to do.
-                Successful people do what they like to do also they do what they feel correct for their business.
-            </p>
-        </div>
-        <div class="thumbnail">
-            <img src="https://source.unsplash.com/300x300/?books,library" alt="Picture">
-        </div>
-    </section>
-
-    <section class="contact" id="contact">
-        <h1>Contact Us</h1>
-        <div class="form">
-            <input class="form-input" type="text" name="name" id="name" placeholder="Enter your name">
-            <input class="form-input" type="tel" name="name" id="phone" placeholder="Enter your phone number">
-            <input class="form-input" type="email" name="name" id="email" placeholder="Enter your email">
-            <textarea class="form-input" placeholder="Ebolarate Your Concern" cols="30" rows="10"></textarea>
-            <button type="submit" name="Submit" id="submit">Submit</button>
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="section portfolio">
+        <div class="container">
+            <h2 class="section-title">Our Work</h2>
+            <div class="portfolio-grid">
+                <div class="portfolio-item">
+                    <img src="https://via.placeholder.com/400x300" alt="Project 1" loading="lazy">
+                    <div class="portfolio-overlay">
+                        <h3>Project Title</h3>
+                        <p>Web Development</p>
+                        <a href="#" class="btn-view">View Project</a>
+                    </div>
+                </div>
+                <div class="portfolio-item">
+                    <img src="https://via.placeholder.com/400x300" alt="Project 2" loading="lazy">
+                    <div class="portfolio-overlay">
+                        <h3>Project Title</h3>
+                        <p>Design</p>
+                        <a href="#" class="btn-view">View Project</a>
+                    </div>
+                </div>
+                <div class="portfolio-item">
+                    <img src="https://via.placeholder.com/400x300" alt="Project 3" loading="lazy">
+                    <div class="portfolio-overlay">
+                        <h3>Project Title</h3>
+                        <p>Mobile App</p>
+                        <a href="#" class="btn-view">View Project</a>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
-    <footer id="footer">
-        <div>Copyright &copy; 2020 AD wwww.theavi.com | All right reserved</div>
+    <!-- Contact Section -->
+    <section id="contact" class="section contact">
+        <div class="container">
+            <h2 class="section-title">Get In Touch</h2>
+            <div class="contact-content">
+                <form class="contact-form" id="contactForm">
+                    <div class="form-group">
+                        <input type="text" name="name" placeholder="Your Name" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" name="email" placeholder="Your Email" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="subject" placeholder="Subject" required>
+                    </div>
+                    <div class="form-group">
+                        <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Send Message</button>
+                </form>
+                <div class="contact-info">
+                    <div class="info-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <h4>Address</h4>
+                        <p>123 Street Name, City, Country</p>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-envelope"></i>
+                        <h4>Email</h4>
+                        <p>info@example.com</p>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-phone"></i>
+                        <h4>Phone</h4>
+                        <p>+1 234 567 8900</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>About</h3>
+                    <p>We create amazing digital experiences.</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#services">Services</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Newsletter</h3>
+                    <p>Subscribe for updates</p>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="Your email" required>
+                        <button type="submit"><i class="fas fa-paper-plane"></i></button>
+                    </form>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 YourBrand. All rights reserved.</p>
+            </div>
+        </div>
     </footer>
 
-<script src="js/responsive.js"></script>
-</body>
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="backToTop" aria-label="Back to top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
 
+    <script src="js/responsive.js"></script>
+</body>
 </html>
