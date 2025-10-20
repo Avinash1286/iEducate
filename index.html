@@ -18,11 +18,22 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loader">
+            <div class="spinner"></div>
+            <p>Loading...</p>
+        </div>
+    </div>
+
+    <!-- Scroll Progress Bar -->
+    <div class="scroll-progress" id="scrollProgress"></div>
+
     <!-- Navigation -->
     <nav class="navbar" id="navbar">
         <div class="container">
             <div class="logo">
-                <a href="#home">YourBrand</a>
+                <a href="#home">iEducate</a>
             </div>
             <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
                 <span></span>
@@ -34,8 +45,14 @@
                 <li><a href="#about" class="nav-link">About</a></li>
                 <li><a href="#services" class="nav-link">Services</a></li>
                 <li><a href="#portfolio" class="nav-link">Portfolio</a></li>
+                <li><a href="#testimonials" class="nav-link">Testimonials</a></li>
+                <li><a href="#blog" class="nav-link">Blog</a></li>
+                <li><a href="#faq" class="nav-link">FAQ</a></li>
                 <li><a href="#contact" class="nav-link">Contact</a></li>
             </ul>
+            <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+                <i class="fas fa-moon"></i>
+            </button>
         </div>
     </nav>
 
@@ -112,6 +129,34 @@
         </div>
     </section>
 
+    <!-- Statistics Section -->
+    <section class="section stats">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <i class="fas fa-users"></i>
+                    <h3 class="stat-number" data-target="5000">0</h3>
+                    <p>Happy Clients</p>
+                </div>
+                <div class="stat-item">
+                    <i class="fas fa-project-diagram"></i>
+                    <h3 class="stat-number" data-target="1250">0</h3>
+                    <p>Projects Completed</p>
+                </div>
+                <div class="stat-item">
+                    <i class="fas fa-award"></i>
+                    <h3 class="stat-number" data-target="85">0</h3>
+                    <p>Awards Won</p>
+                </div>
+                <div class="stat-item">
+                    <i class="fas fa-clock"></i>
+                    <h3 class="stat-number" data-target="24">0</h3>
+                    <p>Hours Support</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Portfolio Section -->
     <section id="portfolio" class="section portfolio">
         <div class="container">
@@ -139,6 +184,167 @@
                         <h3>Project Title</h3>
                         <p>Mobile App</p>
                         <a href="#" class="btn-view">View Project</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="section testimonials">
+        <div class="container">
+            <h2 class="section-title">What Clients Say</h2>
+            <div class="testimonials-slider">
+                <div class="testimonial-track" id="testimonialTrack">
+                    <div class="testimonial-card">
+                        <div class="testimonial-content">
+                            <div class="quote-icon"><i class="fas fa-quote-left"></i></div>
+                            <p>"Outstanding service! They transformed our vision into reality with professionalism and creativity. Highly recommend!"</p>
+                        </div>
+                        <div class="testimonial-author">
+                            <img src="https://via.placeholder.com/80" alt="Client 1">
+                            <div>
+                                <h4>Sarah Johnson</h4>
+                                <span>CEO, TechCorp</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="testimonial-content">
+                            <div class="quote-icon"><i class="fas fa-quote-left"></i></div>
+                            <p>"Exceptional quality and attention to detail. The team went above and beyond to deliver a perfect solution for our business."</p>
+                        </div>
+                        <div class="testimonial-author">
+                            <img src="https://via.placeholder.com/80" alt="Client 2">
+                            <div>
+                                <h4>Michael Chen</h4>
+                                <span>Founder, StartupHub</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="testimonial-content">
+                            <div class="quote-icon"><i class="fas fa-quote-left"></i></div>
+                            <p>"Working with this team was a game-changer. They delivered beyond our expectations and provided excellent support throughout."</p>
+                        </div>
+                        <div class="testimonial-author">
+                            <img src="https://via.placeholder.com/80" alt="Client 3">
+                            <div>
+                                <h4>Emily Rodriguez</h4>
+                                <span>Marketing Director, BrandCo</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button class="testimonial-nav prev" id="testimonialPrev"><i class="fas fa-chevron-left"></i></button>
+                <button class="testimonial-nav next" id="testimonialNext"><i class="fas fa-chevron-right"></i></button>
+                <div class="testimonial-dots" id="testimonialDots"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog Section -->
+    <section id="blog" class="section blog">
+        <div class="container">
+            <h2 class="section-title">Latest News & Insights</h2>
+            <div class="blog-grid">
+                <article class="blog-card">
+                    <div class="blog-image">
+                        <img src="https://via.placeholder.com/400x250" alt="Blog post 1" loading="lazy">
+                        <span class="blog-category">Technology</span>
+                    </div>
+                    <div class="blog-content">
+                        <div class="blog-meta">
+                            <span><i class="far fa-calendar"></i> Oct 15, 2025</span>
+                            <span><i class="far fa-user"></i> Admin</span>
+                        </div>
+                        <h3>The Future of Web Development in 2025</h3>
+                        <p>Explore the latest trends and technologies shaping the future of web development...</p>
+                        <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </article>
+                <article class="blog-card">
+                    <div class="blog-image">
+                        <img src="https://via.placeholder.com/400x250" alt="Blog post 2" loading="lazy">
+                        <span class="blog-category">Design</span>
+                    </div>
+                    <div class="blog-content">
+                        <div class="blog-meta">
+                            <span><i class="far fa-calendar"></i> Oct 12, 2025</span>
+                            <span><i class="far fa-user"></i> Admin</span>
+                        </div>
+                        <h3>10 UI/UX Design Principles Every Designer Should Know</h3>
+                        <p>Master these essential design principles to create better user experiences...</p>
+                        <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </article>
+                <article class="blog-card">
+                    <div class="blog-image">
+                        <img src="https://via.placeholder.com/400x250" alt="Blog post 3" loading="lazy">
+                        <span class="blog-category">Business</span>
+                    </div>
+                    <div class="blog-content">
+                        <div class="blog-meta">
+                            <span><i class="far fa-calendar"></i> Oct 8, 2025</span>
+                            <span><i class="far fa-user"></i> Admin</span>
+                        </div>
+                        <h3>How to Scale Your Digital Business Effectively</h3>
+                        <p>Learn proven strategies to grow your online business and reach new heights...</p>
+                        <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="section faq">
+        <div class="container">
+            <h2 class="section-title">Frequently Asked Questions</h2>
+            <div class="faq-container">
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>What services do you offer?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>We offer a comprehensive range of digital services including web development, UI/UX design, mobile app development, SEO optimization, and digital marketing. Our team of experts is dedicated to delivering high-quality solutions tailored to your specific needs.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>How long does a typical project take?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Project timelines vary depending on scope and complexity. A basic website typically takes 2-4 weeks, while more complex applications may take 2-6 months. We'll provide a detailed timeline during our initial consultation.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>What is your pricing structure?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Our pricing is project-based and depends on your specific requirements. We offer flexible packages and can work within various budgets. Contact us for a free consultation and custom quote.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Do you provide ongoing support and maintenance?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Yes! We offer comprehensive support and maintenance packages to ensure your digital solutions continue to perform optimally. This includes updates, security patches, and technical support.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Can you work with existing systems?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Absolutely! We have experience integrating with various existing systems and platforms. Whether you need to modernize legacy systems or add new features, we can help.</p>
                     </div>
                 </div>
             </div>
@@ -228,6 +434,48 @@
     <button class="back-to-top" id="backToTop" aria-label="Back to top">
         <i class="fas fa-arrow-up"></i>
     </button>
+
+    <!-- Live Chat Widget -->
+    <div class="chat-widget" id="chatWidget">
+        <button class="chat-toggle" id="chatToggle">
+            <i class="fas fa-comments"></i>
+            <span class="chat-badge">1</span>
+        </button>
+        <div class="chat-box" id="chatBox">
+            <div class="chat-header">
+                <h4><i class="fas fa-headset"></i> Live Chat</h4>
+                <button class="chat-close" id="chatClose"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="chat-messages" id="chatMessages">
+                <div class="chat-message bot">
+                    <div class="message-avatar"><i class="fas fa-robot"></i></div>
+                    <div class="message-content">
+                        <p>Hi! 👋 How can we help you today?</p>
+                        <span class="message-time">Just now</span>
+                    </div>
+                </div>
+            </div>
+            <div class="chat-input-container">
+                <input type="text" id="chatInput" placeholder="Type your message..." />
+                <button id="chatSend"><i class="fas fa-paper-plane"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cookie Consent Banner -->
+    <div class="cookie-consent" id="cookieConsent">
+        <div class="cookie-content">
+            <i class="fas fa-cookie-bite"></i>
+            <div class="cookie-text">
+                <h4>We use cookies</h4>
+                <p>This website uses cookies to ensure you get the best experience. <a href="#" class="cookie-link">Learn more</a></p>
+            </div>
+        </div>
+        <div class="cookie-buttons">
+            <button class="btn-cookie accept" id="acceptCookies">Accept</button>
+            <button class="btn-cookie decline" id="declineCookies">Decline</button>
+        </div>
+    </div>
 
     <script src="js/responsive.js"></script>
 </body>
