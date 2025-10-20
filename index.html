@@ -53,6 +53,9 @@
             <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
                 <i class="fas fa-moon"></i>
             </button>
+            <button class="color-toggle" id="colorPickerToggle" aria-label="Choose theme color" title="Choose theme color">
+                <i class="fas fa-palette"></i>
+            </button>
         </div>
     </nav>
 
@@ -161,25 +164,31 @@
     <section id="portfolio" class="section portfolio">
         <div class="container">
             <h2 class="section-title">Our Work</h2>
+            <div class="portfolio-filters" role="tablist" aria-label="Portfolio filters">
+                <button class="filter-btn active" data-filter="all" role="tab" aria-selected="true">All</button>
+                <button class="filter-btn" data-filter="web" role="tab" aria-selected="false">Web</button>
+                <button class="filter-btn" data-filter="design" role="tab" aria-selected="false">Design</button>
+                <button class="filter-btn" data-filter="mobile" role="tab" aria-selected="false">Mobile</button>
+            </div>
             <div class="portfolio-grid">
-                <div class="portfolio-item">
-                    <img src="https://via.placeholder.com/400x300" alt="Project 1" loading="lazy">
+                <div class="portfolio-item" data-category="web" data-caption="Project 1 — Web Development">
+                    <img src="https://via.placeholder.com/1200x900" alt="Project 1" loading="lazy">
                     <div class="portfolio-overlay">
                         <h3>Project Title</h3>
                         <p>Web Development</p>
                         <a href="#" class="btn-view">View Project</a>
                     </div>
                 </div>
-                <div class="portfolio-item">
-                    <img src="https://via.placeholder.com/400x300" alt="Project 2" loading="lazy">
+                <div class="portfolio-item" data-category="design" data-caption="Project 2 — Design">
+                    <img src="https://via.placeholder.com/1200x900/222/fff" alt="Project 2" loading="lazy">
                     <div class="portfolio-overlay">
                         <h3>Project Title</h3>
                         <p>Design</p>
                         <a href="#" class="btn-view">View Project</a>
                     </div>
                 </div>
-                <div class="portfolio-item">
-                    <img src="https://via.placeholder.com/400x300" alt="Project 3" loading="lazy">
+                <div class="portfolio-item" data-category="mobile" data-caption="Project 3 — Mobile App">
+                    <img src="https://via.placeholder.com/1200x900/555/fff" alt="Project 3" loading="lazy">
                     <div class="portfolio-overlay">
                         <h3>Project Title</h3>
                         <p>Mobile App</p>
@@ -434,6 +443,36 @@
     <button class="back-to-top" id="backToTop" aria-label="Back to top">
         <i class="fas fa-arrow-up"></i>
     </button>
+
+    <!-- Lightbox Modal -->
+    <div class="lightbox" id="lightbox" aria-hidden="true" role="dialog" aria-label="Image preview">
+        <button class="lightbox-close" id="lightboxClose" aria-label="Close preview"><i class="fas fa-times"></i></button>
+        <button class="lightbox-nav prev" id="lightboxPrev" aria-label="Previous image"><i class="fas fa-chevron-left"></i></button>
+        <div class="lightbox-content">
+            <img id="lightboxImage" alt="Preview">
+            <p class="lightbox-caption" id="lightboxCaption"></p>
+        </div>
+        <button class="lightbox-nav next" id="lightboxNext" aria-label="Next image"><i class="fas fa-chevron-right"></i></button>
+    </div>
+
+    <!-- Color Picker Popover -->
+    <div class="color-picker" id="colorPicker" aria-hidden="true">
+        <h4>Theme colors</h4>
+        <div class="swatches" id="colorSwatches" role="listbox" aria-label="Theme color options">
+            <!-- Swatches rendered by JS -->
+        </div>
+        <button class="reset-colors" id="resetColors">Reset</button>
+    </div>
+
+    <!-- Command Palette -->
+    <div class="cmd-palette" id="commandPalette" aria-hidden="true" role="dialog" aria-label="Command palette">
+        <div class="cmd-inner">
+            <input type="text" class="cmd-input" id="cmdInput" placeholder="Type a command or search sections... (Esc to close)" aria-label="Command search" />
+            <ul class="cmd-list" id="cmdList" role="listbox" aria-label="Commands">
+                <!-- Items injected by JS -->
+            </ul>
+        </div>
+    </div>
 
     <!-- Live Chat Widget -->
     <div class="chat-widget" id="chatWidget">

@@ -65,6 +65,26 @@
 - Brand name updated to "iEducate"
 - Smooth scroll to all sections
 
+### 11. **Portfolio Filters** 🗂️
+- Filter projects by category (All, Web, Design, Mobile)
+- Smooth show/hide transitions
+- Persists last selected filter in localStorage
+
+### 12. **Portfolio Lightbox** 🖼️
+- Click any portfolio item to open a full-screen preview
+- Next/Previous navigation and captions
+- Close on Esc or backdrop click; keyboard arrows supported
+
+### 13. **Theme Color Picker** 🎨
+- Choose from curated color palettes for primary/accent
+- Changes applied instantly via CSS variables
+- Remembers your selection; includes Reset option
+
+### 14. **Command Palette** ⚡
+- Press Ctrl+K to open a quick command/search dialog
+- Jump to sections, toggle dark mode, open color picker, or apply filters
+- Keyboard navigation with Arrow Up/Down and Enter
+
 ## 🎨 Design Improvements
 
 - **Responsive Design**: All new features work perfectly on mobile, tablet, and desktop

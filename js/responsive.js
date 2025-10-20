@@ -449,3 +449,274 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 });
 
 console.log('🚀 iEducate website loaded successfully with all new features!');
+
+// ==================== ENHANCEMENTS: Portfolio Lightbox ====================
+(() => {
+    const lightbox = document.getElementById('lightbox');
+    if (!lightbox) return;
+    const lightboxImg = document.getElementById('lightboxImage');
+    const lightboxCaption = document.getElementById('lightboxCaption');
+    const btnPrev = document.getElementById('lightboxPrev');
+    const btnNext = document.getElementById('lightboxNext');
+    const btnClose = document.getElementById('lightboxClose');
+    const items = Array.from(document.querySelectorAll('.portfolio-item'));
+    let currentIndex = 0;
+
+    function openLightbox(index) {
+        currentIndex = index;
+        const item = items[currentIndex];
+        const img = item.querySelector('img');
+        lightboxImg.src = img.src;
+        lightboxImg.alt = img.alt || 'Preview';
+        lightboxCaption.textContent = item.getAttribute('data-caption') || img.alt || '';
+        lightbox.classList.add('open');
+        lightbox.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+        lightbox.classList.remove('open');
+        lightbox.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+    }
+
+    function next() {
+        currentIndex = (currentIndex + 1) % items.length;
+        openLightbox(currentIndex);
+    }
+
+    function prev() {
+        currentIndex = (currentIndex - 1 + items.length) % items.length;
+        openLightbox(currentIndex);
+    }
+
+    // Click handlers on portfolio items
+    items.forEach((item, idx) => {
+        item.addEventListener('click', (e) => {
+            // Avoid following any overlay link default
+            e.preventDefault();
+            openLightbox(idx);
+        });
+    });
+
+    btnClose && btnClose.addEventListener('click', closeLightbox);
+    btnNext && btnNext.addEventListener('click', next);
+    btnPrev && btnPrev.addEventListener('click', prev);
+
+    // Close when clicking backdrop outside content
+    lightbox.addEventListener('click', (e) => {
+        if (e.target === lightbox) closeLightbox();
+    });
+
+    // Keyboard controls
+    document.addEventListener('keydown', (e) => {
+        if (!lightbox.classList.contains('open')) return;
+        if (e.key === 'Escape') closeLightbox();
+        if (e.key === 'ArrowRight') next();
+        if (e.key === 'ArrowLeft') prev();
+    });
+})();
+
+// ==================== ENHANCEMENTS: Portfolio Filters ====================
+(() => {
+    const filterBar = document.querySelector('.portfolio-filters');
+    if (!filterBar) return;
+    const buttons = Array.from(filterBar.querySelectorAll('.filter-btn'));
+    const items = Array.from(document.querySelectorAll('.portfolio-item'));
+
+    function applyFilter(category) {
+        items.forEach(item => {
+            const cat = item.getAttribute('data-category');
+            const show = category === 'all' || cat === category;
+            item.classList.toggle('hidden', !show);
+        });
+        localStorage.setItem('portfolioFilter', category);
+    }
+
+    // Restore saved filter
+    const saved = localStorage.getItem('portfolioFilter') || 'all';
+    applyFilter(saved);
+    buttons.forEach(btn => btn.classList.toggle('active', btn.dataset.filter === saved));
+
+    buttons.forEach(btn => {
+        btn.addEventListener('click', () => {
+            buttons.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            applyFilter(btn.dataset.filter);
+        });
+    });
+})();
+
+// ==================== ENHANCEMENTS: Color Picker ====================
+(() => {
+    const toggle = document.getElementById('colorPickerToggle');
+    const panel = document.getElementById('colorPicker');
+    const swatchesEl = document.getElementById('colorSwatches');
+    const resetBtn = document.getElementById('resetColors');
+    if (!toggle || !panel) return;
+
+    const palettes = [
+        { primary: '#007bff', accent: '#28a745' },
+        { primary: '#ff4757', accent: '#ffa502' },
+        { primary: '#6f42c1', accent: '#20c997' },
+        { primary: '#e83e8c', accent: '#00d1b2' },
+        { primary: '#1e90ff', accent: '#ff6b6b' },
+        { primary: '#0d6efd', accent: '#6610f2' },
+        { primary: '#10b981', accent: '#3b82f6' },
+        { primary: '#f59e0b', accent: '#ef4444' },
+        { primary: '#14b8a6', accent: '#f97316' },
+        { primary: '#22c55e', accent: '#06b6d4' },
+        { primary: '#a855f7', accent: '#f43f5e' },
+        { primary: '#3f83f8', accent: '#f59e0b' },
+    ];
+
+    function applyPalette(p) {
+        const root = document.documentElement;
+        root.style.setProperty('--primary-color', p.primary);
+        root.style.setProperty('--accent-color', p.accent);
+        localStorage.setItem('themePalette', JSON.stringify(p));
+    }
+
+    // Render swatches
+    palettes.forEach(p => {
+        const s = document.createElement('button');
+        s.className = 'swatch';
+        s.style.background = `linear-gradient(135deg, ${p.primary}, ${p.accent})`;
+        s.setAttribute('title', `${p.primary} / ${p.accent}`);
+        s.addEventListener('click', () => applyPalette(p));
+        swatchesEl.appendChild(s);
+    });
+
+    // Restore palette
+    const saved = localStorage.getItem('themePalette');
+    if (saved) {
+        try { applyPalette(JSON.parse(saved)); } catch {}
+    }
+
+    // Toggle panel visibility
+    toggle.addEventListener('click', (e) => {
+        e.stopPropagation();
+        panel.classList.toggle('show');
+        panel.setAttribute('aria-hidden', String(!panel.classList.contains('show')));
+    });
+
+    // Reset colors
+    resetBtn && resetBtn.addEventListener('click', () => {
+        const defaults = { primary: '#007bff', accent: '#28a745' };
+        applyPalette(defaults);
+    });
+
+    // Click outside to close
+    document.addEventListener('click', (e) => {
+        if (!panel.contains(e.target) && e.target !== toggle) {
+            panel.classList.remove('show');
+            panel.setAttribute('aria-hidden', 'true');
+        }
+    });
+})();
+
+// ==================== ENHANCEMENTS: Command Palette (Ctrl+K) ====================
+(() => {
+    const palette = document.getElementById('commandPalette');
+    const input = document.getElementById('cmdInput');
+    const list = document.getElementById('cmdList');
+    if (!palette || !input || !list) return;
+
+    const commands = [
+        { label: 'Go: Home', action: () => document.querySelector('#home').scrollIntoView({ behavior: 'smooth' }) },
+        { label: 'Go: About', action: () => document.querySelector('#about').scrollIntoView({ behavior: 'smooth' }) },
+        { label: 'Go: Services', action: () => document.querySelector('#services').scrollIntoView({ behavior: 'smooth' }) },
+        { label: 'Go: Portfolio', action: () => document.querySelector('#portfolio').scrollIntoView({ behavior: 'smooth' }) },
+        { label: 'Go: Testimonials', action: () => document.querySelector('#testimonials').scrollIntoView({ behavior: 'smooth' }) },
+        { label: 'Go: Blog', action: () => document.querySelector('#blog').scrollIntoView({ behavior: 'smooth' }) },
+        { label: 'Go: FAQ', action: () => document.querySelector('#faq').scrollIntoView({ behavior: 'smooth' }) },
+        { label: 'Go: Contact', action: () => document.querySelector('#contact').scrollIntoView({ behavior: 'smooth' }) },
+        { label: 'Toggle Dark Mode', action: () => document.getElementById('themeToggle').click() },
+        { label: 'Open Color Picker', action: () => document.getElementById('colorPickerToggle').click() },
+        { label: 'Filter: All Projects', action: () => document.querySelector('.filter-btn[data-filter="all"]').click() },
+        { label: 'Filter: Web Projects', action: () => document.querySelector('.filter-btn[data-filter="web"]').click() },
+        { label: 'Filter: Design Projects', action: () => document.querySelector('.filter-btn[data-filter="design"]').click() },
+        { label: 'Filter: Mobile Projects', action: () => document.querySelector('.filter-btn[data-filter="mobile"]').click() },
+    ];
+
+    let activeIndex = 0;
+    let currentList = commands;
+
+    function open() {
+        palette.classList.add('open');
+        palette.setAttribute('aria-hidden', 'false');
+        render(commands);
+        currentList = commands;
+        activeIndex = 0;
+        highlight();
+        input.value = '';
+        setTimeout(() => input.focus(), 0);
+    }
+
+    function close() {
+        palette.classList.remove('open');
+        palette.setAttribute('aria-hidden', 'true');
+    }
+
+    function render(items) {
+        list.innerHTML = '';
+        items.forEach((cmd, idx) => {
+            const li = document.createElement('li');
+            li.className = 'cmd-item';
+            li.setAttribute('role', 'option');
+            li.textContent = cmd.label;
+            li.addEventListener('click', () => {
+                cmd.action();
+                close();
+            });
+            list.appendChild(li);
+        });
+    }
+
+    function highlight() {
+        const items = list.querySelectorAll('.cmd-item');
+        items.forEach((el, idx) => el.classList.toggle('active', idx === activeIndex));
+        const activeEl = items[activeIndex];
+        if (activeEl) activeEl.scrollIntoView({ block: 'nearest' });
+    }
+
+    function filterCommands(q) {
+        const low = q.toLowerCase();
+        const filtered = commands.filter(c => c.label.toLowerCase().includes(low));
+        currentList = filtered;
+        render(filtered);
+        activeIndex = 0;
+        highlight();
+    }
+
+    // Keyboard shortcut Ctrl+K (or Cmd+K on macOS)
+    document.addEventListener('keydown', (e) => {
+        const isMac = navigator.platform.toUpperCase().includes('MAC');
+        if ((isMac ? e.metaKey : e.ctrlKey) && e.key.toLowerCase() === 'k') {
+            e.preventDefault();
+            if (palette.classList.contains('open')) close(); else open();
+        }
+        if (e.key === 'Escape' && palette.classList.contains('open')) close();
+    });
+
+    // Navigate list
+    input.addEventListener('keydown', (e) => {
+        const items = list.querySelectorAll('.cmd-item');
+        if (!items.length) return;
+        if (e.key === 'ArrowDown') { e.preventDefault(); activeIndex = (activeIndex + 1) % items.length; highlight(); }
+        if (e.key === 'ArrowUp') { e.preventDefault(); activeIndex = (activeIndex - 1 + items.length) % items.length; highlight(); }
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            (items[activeIndex] || items[0]).click();
+        }
+    });
+
+    input.addEventListener('input', (e) => {
+        filterCommands(e.target.value);
+    });
+
+    // Click outside to close
+    palette.addEventListener('click', (e) => {
+        if (e.target === palette) close();
+    });
+})();
